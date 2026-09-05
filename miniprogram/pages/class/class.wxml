@@ -1,0 +1,94 @@
+<view class="container">
+  <view class="tabs">
+    <view class="tab {{tab==='students'?'active':''}}" bindtap="switchTab" data-t="students">学生</view>
+    <view class="tab {{tab==='dorms'?'active':''}}" bindtap="switchTab" data-t="dorms">寝室</view>
+    <view class="tab {{tab==='duty'?'active':''}}" bindtap="switchTab" data-t="duty">值日小组</view>
+    <view class="tab {{tab==='study'?'active':''}}" bindtap="switchTab" data-t="study">学习小组</view>
+  </view>
+
+  <!-- 学生 -->
+  <block wx:if="{{tab==='students'}}">
+    <view class="row" style="margin-bottom:20rpx">
+      <text class="section-title">学生 {{students.length}} 人</text>
+      <view class="btn sm" bindtap="toggleForm">{{showForm?'取消':'+ 添加'}}</view>
+    </view>
+    <view class="card" wx:if="{{showForm}}">
+      <view class="grid2">
+        <view class="field"><label>姓名 *</label><input data-k="name" bindinput="onInput" value="{{form.name}}" placeholder="姓名" /></view>
+        <view class="field"><label>学号</label><input data-k="student_no" bindinput="onInput" value="{{form.student_no}}" placeholder="学号" /></view>
+        <view class="field"><label>性别</label>
+          <picker bindchange="onGender" value="{{form.gender==='女'?1:0}}" range="{{['男','女']}}"><view>{{form.gender}}</view></picker>
+        </view>
+        <view class="field"><label>床号</label><input data-k="bed_no" bindinput="onInput" value="{{form.bed_no}}" placeholder="床号" /></view>
+        <view class="field"><label>寝室</label>
+          <picker data-k="dorm_idx" bindchange="onPick" value="{{form.dorm_idx}}" range-key="name" range="{{dorms}}"><view>{{form.dorm_idx!==''&&form.dorm_idx!=null?dorms[form.dorm_idx].name:'未分配'}}</view></picker>
+        </view>
+        <view class="field"><label>值日小组</label>
+          <picker data-k="duty_idx" bindchange="onPick" value="{{form.duty_idx}}" range-key="name" range="{{duty}}"><view>{{form.duty_idx!==''&&form.duty_idx!=null?duty[form.duty_idx].name:'未分配'}}</view></picker>
+        </view>
+        <view class="field"><label>学习小组</label>
+          <picker data-k="study_idx" bindchange="onPick" value="{{form.study_idx}}" range-key="name" range="{{study}}"><view>{{form.study_idx!==''&&form.study_idx!=null?study[form.study_idx].name:'未分配'}}</view></picker>
+        </view>
+        <view class="field"><label>职务</label><input data-k="role" bindinput="onInput" value="{{form.role}}" /></view>
+      </view>
+      <view class="btn" style="margin-top:20rpx" bindtap="saveStudent">保存</view>
+    </view>
+
+    <view class="list-item" wx:for="{{students}}" wx:key="id">
+      <view>
+        <text style="font-weight:600">{{item.name}}</text>
+        <text class="muted" style="margin-left:12rpx">{{item.student_no}}</text>
+        <view class="muted">{{item.dorm_name||'无寝'}} · {{item.duty_group_name||'无值日组'}} · {{item.study_group_name||'无学习组'}}</view>
+      </view>
+      <view class="btn sm danger" data-id="{{item.id}}" bindtap="delStudent">删</view>
+    </view>
+  </block>
+
+  <!-- 寝室 -->
+  <block wx:if="{{tab==='dorms'}}">
+    <view class="row" style="margin-bottom:20rpx">
+      <text class="section-title">寝室 {{dorms.length}} 间</text>
+      <view class="btn sm" data-type="dorm" bindtap="addGroup">+ 添加</view>
+    </view>
+    <view class="card" wx:for="{{dorms}}" wx:key="id">
+      <view class="row">
+        <view><text style="font-weight:600">寝室 {{item.name}}</text> <text class="muted">{{item.building}}</text></view>
+        <view class="btn sm danger" data-type="dorm" data-id="{{item.id}}" bindtap="delGroup">删</view>
+      </view>
+      <view class="muted" style="margin-top:12rpx">
+        {{item.members.length? '成员: ' : '暂无成员'}}{{item.members.length}}人
+      </view>
+      <view wx:for="{{item.members}}" wx:key="id" wx:for-item="m" class="muted">· {{m.name}} ({{m.bed_no||'-'}}) {{m.gender}}</view>
+    </view>
+  </block>
+
+  <!-- 值日小组 -->
+  <block wx:if="{{tab==='duty'}}">
+    <view class="row" style="margin-bottom:20rpx">
+      <text class="section-title">值日小组 {{duty.length}}</text>
+      <view class="btn sm" data-type="duty" bindtap="addGroup">+ 添加</view>
+    </view>
+    <view class="card" wx:for="{{duty}}" wx:key="id">
+      <view class="row">
+        <view style="font-weight:600">{{item.name}}</view>
+        <view class="btn sm danger" data-type="duty" data-id="{{item.id}}" bindtap="delGroup">删</view>
+      </view>
+      <view class="muted" style="margin-top:12rpx">{{item.members.length? item.members.length+'人' : '暂无成员'}}</view>
+    </view>
+  </block>
+
+  <!-- 学习小组 -->
+  <block wx:if="{{tab==='study'}}">
+    <view class="row" style="margin-bottom:20rpx">
+      <text class="section-title">学习小组 {{study.length}}</text>
+      <view class="btn sm" data-type="study" bindtap="addGroup">+ 添加</view>
+    </view>
+    <view class="card" wx:for="{{study}}" wx:key="id">
+      <view class="row">
+        <view style="font-weight:600">{{item.name}}</view>
+        <view class="btn sm danger" data-type="study" data-id="{{item.id}}" bindtap="delGroup">删</view>
+      </view>
+      <view class="muted" style="margin-top:12rpx">{{item.members.length? item.members.length+'人' : '暂无成员'}}</view>
+    </view>
+  </block>
+</view>

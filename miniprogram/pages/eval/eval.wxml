@@ -1,0 +1,29 @@
+<view class="container">
+  <view class="card">
+    <view class="section-title">评价规则</view>
+    <view class="muted" style="line-height:1.8">
+      综合得分 = 成绩分×50% + 荣誉分×50%<br/>
+      成绩分 = 该生历次平均分 ÷ 班级最高平均分 × 100<br/>
+      荣誉分 = 荣誉净值 min-max 归一化至 0–100
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">综合排名 ({{rows.length}} 人)</view>
+    <view wx:if="{{!rows.length}}" class="empty">暂无数据</view>
+    <view wx:for="{{rows}}" wx:key="id" class="list-item">
+      <view style="width:60rpx;font-size:36rpx;text-align:center">
+        {{item.rank===1?'🥇':item.rank===2?'🥈':item.rank===3?'🥉':item.rank}}
+      </view>
+      <view style="flex:1">
+        <text style="font-weight:600">{{item.name}}</text>
+        <text class="muted" style="margin-left:10rpx">{{item.student_no}}</text>
+        <view class="muted">{{item.dorm_name||'无寝'}} · {{item.study_group_name||'无学习组'}}</view>
+      </view>
+      <view style="text-align:right">
+        <view class="pill" style="font-size:30rpx">{{item.total}}</view>
+        <view class="muted">成绩{{item.grade_score}} · 荣誉{{item.honor_score}}</view>
+      </view>
+    </view>
+  </view>
+</view>

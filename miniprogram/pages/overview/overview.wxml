@@ -1,0 +1,36 @@
+<view class="container">
+  <view class="card">
+    <view class="section-title">🏫 班主任工作平台</view>
+    <view class="muted">网站与小程序数据实时互通 · 四大模块协同</view>
+  </view>
+
+  <view class="grid2">
+    <view class="card" wx:for="{{stats}}" wx:key="label">
+      <view class="stat">
+        <view style="font-size:44rpx">{{item.ic}}</view>
+        <view class="num">{{item.num}}</view>
+        <view class="label">{{item.label}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">四大模块</view>
+    <view class="list-item" bindtap="go" data-url="/pages/class/class">
+      <text>👥 班级班情</text><text class="muted">学生/寝室/小组 ›</text>
+    </view>
+    <view class="list-item" bindtap="go" data-url="/pages/grades/grades">
+      <text>📝 成绩管理</text><text class="muted">历次成绩排名 ›</text>
+    </view>
+    <view class="list-item" bindtap="go" data-url="/pages/honor/honor">
+      <text>🏆 班级荣誉</text><text class="muted">纪律卫生加减分 ›</text>
+    </view>
+    <view class="list-item" bindtap="go" data-url="/pages/eval/eval">
+      <text>⭐ 综合评价</text><text class="muted">成绩50%+荣誉50% ›</text>
+    </view>
+  </view>
+
+  <view class="muted" style="text-align:center;margin-top:20rpx">
+    提示: 请在 app.js 配置后端 baseUrl
+  </view>
+</view>

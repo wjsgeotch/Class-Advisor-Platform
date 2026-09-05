@@ -1,0 +1,44 @@
+<view class="container">
+  <view class="card">
+    <view class="section-title">新增加减分</view>
+    <view class="field"><label>对象类型</label>
+      <picker bindchange="onScope" value="{{scopeIdx}}" range="{{scopes}}" range-key="label">
+        <view>{{scopeLabel}}</view>
+      </picker>
+    </view>
+    <view class="field"><label>对象</label>
+      <picker wx:if="{{targets.length}}" bindchange="onTarget" value="{{targetIdx}}" range="{{targets}}" range-key="label">
+        <view>{{targetLabel}}</view>
+      </picker>
+      <view wx:else class="muted">无可选对象</view>
+    </view>
+    <view class="field"><label>类别</label>
+      <picker bindchange="onCat" value="{{catIdx}}" range="{{cats}}" range-key="label"><view>{{cats[catIdx].label}}</view></picker>
+    </view>
+    <view class="field"><label>分值 (正数加分, 负数扣分)</label>
+      <input type="number" data-k="delta" bindinput="onInput" value="{{delta}}" />
+    </view>
+    <view class="field"><label>原因</label>
+      <input data-k="reason" bindinput="onInput" value="{{reason}}" placeholder="如: 寝室卫生不合格" />
+    </view>
+    <view class="field"><label>日期</label>
+      <picker mode="date" bindchange="onDate" value="{{date}}"><view>{{date}}</view></picker>
+    </view>
+    <view class="btn" style="margin-top:10rpx" bindtap="save">保存记录</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">记录列表 ({{records.length}})</view>
+    <view wx:if="{{!records.length}}" class="empty">暂无记录</view>
+    <view wx:for="{{records}}" wx:key="id" class="list-item">
+      <view style="flex:1">
+        <view><text style="font-weight:600">{{item.student_name || (scopeNames[item.scope] || '整组')}}</text>
+          <text class="tag {{item.category==='honor'?'green':'red'}}" style="margin-left:10rpx">{{catLabel[item.category]}}</text>
+        </view>
+        <view class="muted">{{item.record_date}} · {{item.reason || '-'}}</view>
+      </view>
+      <view style="margin:0 16rpx"><text class="pill" style="color:{{item.delta>=0?'#21a366':'#e23b3b'}}">{{item.delta>0?'+':''}}{{item.delta}}</text></view>
+      <view class="btn sm danger" data-id="{{item.id}}" bindtap="del">删</view>
+    </view>
+  </view>
+</view>

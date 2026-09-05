@@ -1,0 +1,1 @@
+.list-item { background: #f7f8fc; border-radius: 14rpx; padding: 22rpx; margin-bottom: 14rpx; display: flex; align-items: center; }

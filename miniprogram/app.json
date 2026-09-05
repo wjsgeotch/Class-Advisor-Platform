@@ -1,0 +1,31 @@
+{
+  "pages": [
+    "pages/overview/overview",
+    "pages/class/class",
+    "pages/grades/grades",
+    "pages/honor/honor",
+    "pages/eval/eval"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2b3a67",
+    "navigationBarTitleText": "班主任工作平台",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f4f6fb"
+  },
+  "tabBar": {
+    "color": "#7a86a6",
+    "selectedColor": "#4f6df5",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/overview/overview", "text": "概览" },
+      { "pagePath": "pages/class/class", "text": "班情" },
+      { "pagePath": "pages/grades/grades", "text": "成绩" },
+      { "pagePath": "pages/honor/honor", "text": "荣誉" },
+      { "pagePath": "pages/eval/eval", "text": "评价" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

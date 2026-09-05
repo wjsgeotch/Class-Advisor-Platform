@@ -1,0 +1,4 @@
+{
+  "desc": "班主任工作平台小程序 sitemap",
+  "rules": [{ "action": "allow", "page": "*" }]
+}

@@ -1,0 +1,1 @@
+.list-item { background: #fff; border-radius: 14rpx; padding: 20rpx 24rpx; margin-bottom: 14rpx; display: flex; align-items: center; justify-content: space-between; }

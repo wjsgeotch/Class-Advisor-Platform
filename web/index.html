@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>班主任工作平台</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-icon">🏫</div>
+        <div>
+          <h1>班主任平台</h1>
+          <p>Class Teacher Hub</p>
+        </div>
+      </div>
+      <nav>
+        <a href="#overview" class="nav-link" data-view="overview">📊 概览</a>
+        <a href="#class" class="nav-link" data-view="class">👥 班级班情</a>
+        <a href="#grades" class="nav-link" data-view="grades">📝 成绩管理</a>
+        <a href="#honor" class="nav-link" data-view="honor">🏆 班级荣誉</a>
+        <a href="#eval" class="nav-link" data-view="eval">⭐ 综合评价</a>
+      </nav>
+      <div class="side-footer">
+        <div class="mini-link">
+          <strong>📱 微信小程序</strong>
+          <p>扫描后端根目录小程序工程用微信开发者工具打开, BASE_URL 指向本服务。</p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h2 id="page-title">概览</h2>
+        <span class="badge" id="conn-badge">已连接</span>
+      </header>
+      <div class="content" id="view"></div>
+    </main>
+  </div>
+
+  <!-- 弹窗模板 -->
+  <div class="modal-mask" id="modal-mask" hidden>
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="modal-title">标题</h3>
+        <button class="modal-close" onclick="App.closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/views/overview.js"></script>
+  <script src="/js/views/class.js"></script>
+  <script src="/js/views/grades.js"></script>
+  <script src="/js/views/honor.js"></script>
+  <script src="/js/views/eval.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
