@@ -117,6 +117,9 @@ tr:hover td { background: #fafbff; }
   position: fixed; inset: 0; background: rgba(20,28,55,.45);
   display: flex; align-items: center; justify-content: center; z-index: 50;
 }
+/* 关键修复: display:flex 会覆盖 hidden 属性, 导致空弹窗默认显示。
+   这里强制让带 hidden 的弹窗一律隐藏, 仅当 JS 移除 hidden 时才显示。 */
+.modal-mask[hidden] { display: none !important; }
 .modal {
   background: #fff; border-radius: 14px; width: 520px; max-width: 92vw;
   max-height: 88vh; display: flex; flex-direction: column;
