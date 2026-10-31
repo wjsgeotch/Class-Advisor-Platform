@@ -124,7 +124,7 @@ import io, os, glob
 
 OUT = "/workspace/<标题>.pdf"
 W, H = A4; mx = my = 20           # 页边距 pt
-TARGET_W = 1654                   # 约 200 DPI，按需调大/小
+TARGET_W = 2480                   # 300 DPI（A4 宽 210mm → 2480px），按需调整
 c = canvas.Canvas(OUT, pagesize=A4)
 c.setTitle("<标题>")
 c.setSubject("<副标题>")
